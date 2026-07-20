@@ -1,0 +1,160 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f8f6f2;
+  --foreground: #141414;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Paleta Muniz — parede caiada + esquadria pintada, não creme-terracota */
+  --color-cal: #f8f6f2;
+  --color-carvao: #141414;
+  --color-anil: #0e5a66;
+  --color-anil-escuro: #0a444d;
+  --color-mangue: #1f6f53;
+  --color-mangue-escuro: #17553f;
+  --color-latao: #8a6d3b;
+  --color-latao-escuro: #6b5429;
+  --color-grafite: #4b4b4b;
+  --color-alerta: #8a3b1f;
+
+  --font-display: var(--font-zilla-slab);
+  --font-sans: var(--font-public-sans);
+  --font-utility: var(--font-archivo);
+}
+
+body {
+  background: var(--color-cal);
+  color: var(--color-carvao);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-anil);
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------------------
+   Documento do contrato (prévia no admin + página pública de assinatura)
+   --------------------------------------------------------------------------- */
+.contract-document {
+  font-family: var(--font-sans), Georgia, "Times New Roman", serif;
+  color: #141414;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.contract-document h1 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 0 0.5rem;
+}
+.contract-document h2 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 1.25rem 0 0.4rem;
+}
+.contract-document p {
+  margin: 0.5rem 0;
+  text-align: justify;
+}
+.contract-document ul {
+  margin: 0.4rem 0 0.4rem 1.2rem;
+  list-style: disc;
+}
+.contract-document li {
+  margin: 0.15rem 0;
+}
+.contract-document hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 1rem 0;
+}
+.contract-document blockquote {
+  border-left: 3px solid var(--color-latao);
+  background: #faf7f0;
+  padding: 0.5rem 0.75rem;
+  margin: 0.75rem 0;
+  font-size: 0.85rem;
+}
+.contract-document table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+.contract-document td {
+  vertical-align: top;
+  padding: 0.5rem 0.75rem;
+  width: 50%;
+}
+
+/* Campo ainda não preenchido, destacado na prévia. */
+.contract-missing {
+  background: #fde68a;
+  color: #713f12;
+  padding: 0 0.2em;
+  border-radius: 2px;
+  font-style: normal;
+}
+
+.contract-signature-block {
+  margin-top: 2rem;
+  border-top: 1px solid #999;
+  padding-top: 0.75rem;
+  font-size: 0.85rem;
+}
+.contract-signature-block p {
+  margin: 0.15rem 0;
+  text-align: left;
+}
+.contract-signature-hash {
+  font-size: 0.7rem;
+  color: #666;
+  word-break: break-all;
+}
+.contract-signature-note {
+  font-size: 0.72rem;
+  color: #555;
+  margin-top: 0.5rem !important;
+}
+
+/* ---------------------------------------------------------------------------
+   Impressão: só o documento do contrato vira PDF (Ctrl/Cmd+P ou botão).
+   --------------------------------------------------------------------------- */
+@media print {
+  .no-print,
+  header,
+  footer {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+  .contract-print {
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+  }
+  /* Na impressão, campos faltantes viram texto neutro (sem tarja amarela). */
+  .contract-missing {
+    background: transparent;
+    color: #333;
+  }
+  .contract-document {
+    font-size: 11pt;
+  }
+}
